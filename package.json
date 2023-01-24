@@ -1,0 +1,18 @@
+{
+  "name": "ass_module",
+  "version": "1.0.0",
+  "description": "gRPC-Web library that sends event messages for Alerts Streamer Service alerts, built by rollup",
+  "author": "Adar Hefer",
+  "license": "MIT",
+  "dependencies": {
+    "@alerts-streamer-service/grpc_web_client": "^4.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "rollup": "^3.10.0"
+  },
+  "scripts": {
+    "build": "npx rollup -c"
+  }
+}
