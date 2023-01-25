@@ -18,8 +18,15 @@ jobs:
         workload_identity_provider: ${{ secrets.PROVIDER_NAME }}
         service_account: ${{ secrets.SA_EMAIL }}
 
+    - name: Setup node
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
     - name: Bundle everything
-      run: npm run build
+      run: |
+        npm install
+        npm run build
     
     - id: 'upload-folder'
       uses: 'google-github-actions/upload-cloud-storage@v1'
