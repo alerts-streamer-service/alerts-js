@@ -10,9 +10,10 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
+    "jsdoc-to-markdown": "^8.0.0",
     "rollup": "^3.10.0"
   },
   "scripts": {
-    "build": "npx rollup -c"
+    "build": "npx rollup -c && npx jsdoc2md -c jsdoc.conf index.mjs > docs.md"
   }
 }
