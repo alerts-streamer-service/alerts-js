@@ -11,6 +11,7 @@ const client = new EventClient(`https://ass.coursequery.app/twitch/events`);
  * @property {UserFollowedCallback=} onUserFollowed
  * @property {UserSubscribedCallback=} onUserSubscribed
  * @property {UserGiftedSubscriptionsCallback=} onUserGiftedSubscriptions
+ * @property {UserRaidedCallback=} onUserRaided
  * @property {ErrorCallback=} onError
  */
 
@@ -26,6 +27,11 @@ const client = new EventClient(`https://ass.coursequery.app/twitch/events`);
  * @callback UserGiftedSubscriptionsCallback
  * @param {UserGiftedSubscriptionsData} data
  */
+/**
+ * @callback UserRaidedCallback
+ * @param {UserRaidedData} data
+ */
+
 /**
  * @callback ErrorCallback
  * @param {Object} error
@@ -46,6 +52,11 @@ const client = new EventClient(`https://ass.coursequery.app/twitch/events`);
  * @property {string} userName
  * @property {number} total
  * @property {string} tier
+ */
+/**
+ * @typedef {Object} UserRaidedData
+ * @property {string} raiderName
+ * @property {number} viewers
  */
 
 /**
@@ -88,6 +99,16 @@ function configure(config) {
                         tier: userGiftedSubscriptionsData.getTier()
                     });
                     break;
+                case PayloadCase.USER_RAIDED_DATA:
+                    const userRaidedData = response.getUserRaidedData();
+                    if (!userRaidedData) { return; }
+    
+                    config.onUserRaided?.({
+                        raiderName: userRaidedData.getRaiderName(),
+                        viewers: userRaidedData.getViewers()
+                    });
+                    break;
+    
             }
         })
         .on('error', (error) => config.onError?.(error));
