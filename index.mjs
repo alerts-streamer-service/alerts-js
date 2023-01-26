@@ -125,7 +125,7 @@ export function configure(config) {
 /**
  * @enum {number}
  */
-const EventType = {
+export const EventType = {
     TWITCH_USER_FOLLOWED: 1,
     TWITCH_USER_SUBSCRIBED: 2,
     TWITCH_USER_GIFTED_SUBSCRIPTIONS: 3,
