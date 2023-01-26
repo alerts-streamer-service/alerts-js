@@ -1,5 +1,5 @@
 // @ts-check
-import { ServerStreamingEventResponse } from '@alerts-streamer-service/grpc_web_client/src/events_pb';
+import { ServerStreamingEventResponse, TestServerStreamingEventRequest, TestServerStreamingEventResponse } from '@alerts-streamer-service/grpc_web_client/src/events_pb';
 import { EventClient } from '@alerts-streamer-service/grpc_web_client/src/events_grpc_web_pb';
 import { Empty } from 'google-protobuf/google/protobuf/empty_pb';
 
@@ -63,7 +63,7 @@ const client = new EventClient(`https://ass.coursequery.app/twitch/events`);
  * 
  * @param {TwitchConfig} config
  */
-function configure(config) {
+export function configure(config) {
     const PayloadCase = ServerStreamingEventResponse.PayloadCase;
 
     const metadata = { 'api-key': config.apiKey };
@@ -114,4 +114,50 @@ function configure(config) {
         .on('error', (error) => config.onError?.(error));
 }
 
-export { configure };
+
+/**
+ * @typedef {Object} TestConfig
+ * @property {string} apiKey
+ * @property {EventType} eventType
+ * @property {ErrorCallback=} onError
+
+ */
+/**
+ * @enum {number}
+ */
+const EventType = {
+    TWITCH_USER_FOLLOWED: 1,
+    TWITCH_USER_SUBSCRIBED: 2,
+    TWITCH_USER_GIFTED_SUBSCRIPTIONS: 3,
+    TWITCH_USER_RAIDED: 4
+}
+
+/**
+ * 
+ * @param {TestConfig} config
+ */
+export function test(config) {
+    const request = new TestServerStreamingEventRequest();
+    switch (config.eventType) {
+        case EventType.TWITCH_USER_FOLLOWED:
+            request.setType(TestServerStreamingEventRequest.EventType.TWITCH_USER_FOLLOWED);
+            break;
+        case EventType.TWITCH_USER_SUBSCRIBED:
+            request.setType(TestServerStreamingEventRequest.EventType.TWITCH_USER_SUBSCRIBED);
+            break;
+        case EventType.TWITCH_USER_GIFTED_SUBSCRIPTIONS:
+            request.setType(TestServerStreamingEventRequest.EventType.TWITCH_USER_GIFTED_SUBSCRIPTIONS);
+            break;
+        case EventType.TWITCH_USER_RAIDED:
+            request.setType(TestServerStreamingEventRequest.EventType.TWITCH_USER_RAIDED);
+            break;
+    }
+
+    const metadata = { 'api-key': config.apiKey };
+    client.testServerStreamingEvent(request, metadata, (error) => {
+        if (error) {
+            config.onError?.(error);
+            return;
+        }
+    });
+}
