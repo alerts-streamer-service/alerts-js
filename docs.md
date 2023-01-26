@@ -3,6 +3,8 @@
 <dl>
 <dt><a href="#configure">configure(config)</a></dt>
 <dd></dd>
+<dt><a href="#test">test(config)</a></dt>
+<dd></dd>
 </dl>
 
 ## Typedefs
@@ -16,6 +18,8 @@
 <dd></dd>
 <dt><a href="#UserGiftedSubscriptionsCallback">UserGiftedSubscriptionsCallback</a> : <code>function</code></dt>
 <dd></dd>
+<dt><a href="#UserRaidedCallback">UserRaidedCallback</a> : <code>function</code></dt>
+<dd></dd>
 <dt><a href="#ErrorCallback">ErrorCallback</a> : <code>function</code></dt>
 <dd></dd>
 <dt><a href="#UserFollowedData">UserFollowedData</a> : <code>Object</code></dt>
@@ -24,8 +28,16 @@
 <dd></dd>
 <dt><a href="#UserGiftedSubscriptionsData">UserGiftedSubscriptionsData</a> : <code>Object</code></dt>
 <dd></dd>
+<dt><a href="#UserRaidedData">UserRaidedData</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#TestConfig">TestConfig</a> : <code>Object</code></dt>
+<dd></dd>
 </dl>
 
+<a name="EventType"></a>
+
+## EventType : <code>enum</code>
+**Kind**: global enum  
 <a name="configure"></a>
 
 ## configure(config)
@@ -34,6 +46,15 @@
 | Param | Type |
 | --- | --- |
 | config | [<code>TwitchConfig</code>](#TwitchConfig) | 
+
+<a name="test"></a>
+
+## test(config)
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| config | [<code>TestConfig</code>](#TestConfig) | 
 
 <a name="TwitchConfig"></a>
 
@@ -47,6 +68,7 @@
 | [onUserFollowed] | [<code>UserFollowedCallback</code>](#UserFollowedCallback) | 
 | [onUserSubscribed] | [<code>UserSubscribedCallback</code>](#UserSubscribedCallback) | 
 | [onUserGiftedSubscriptions] | [<code>UserGiftedSubscriptionsCallback</code>](#UserGiftedSubscriptionsCallback) | 
+| [onUserRaided] | [<code>UserRaidedCallback</code>](#UserRaidedCallback) | 
 | [onError] | [<code>ErrorCallback</code>](#ErrorCallback) | 
 
 <a name="UserFollowedCallback"></a>
@@ -75,6 +97,15 @@
 | Param | Type |
 | --- | --- |
 | data | [<code>UserGiftedSubscriptionsData</code>](#UserGiftedSubscriptionsData) | 
+
+<a name="UserRaidedCallback"></a>
+
+## UserRaidedCallback : <code>function</code>
+**Kind**: global typedef  
+
+| Param | Type |
+| --- | --- |
+| data | [<code>UserRaidedData</code>](#UserRaidedData) | 
 
 <a name="ErrorCallback"></a>
 
@@ -118,4 +149,27 @@
 | userName | <code>string</code> | 
 | total | <code>number</code> | 
 | tier | <code>string</code> | 
+
+<a name="UserRaidedData"></a>
+
+## UserRaidedData : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| raiderName | <code>string</code> | 
+| viewers | <code>number</code> | 
+
+<a name="TestConfig"></a>
+
+## TestConfig : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| apiKey | <code>string</code> | 
+| eventType | [<code>EventType</code>](#EventType) | 
+| [onError] | [<code>ErrorCallback</code>](#ErrorCallback) | 
 
