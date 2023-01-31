@@ -5,12 +5,14 @@
   "author": "Adar Hefer",
   "license": "MIT",
   "dependencies": {
-    "@alerts-streamer-service/grpc_web_client": "^4.0.0"
+    "@alerts-streamer-service/grpc_web_client": "^4.0.0",
+    "google-protobuf": "^3.21.2"
   },
   "types": "index.d.mts",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
+    "@types/google-protobuf": "^3.15.6",
     "jsdoc-to-markdown": "^8.0.0",
     "rollup": "^3.10.0",
     "typescript": "^4.9.5"
