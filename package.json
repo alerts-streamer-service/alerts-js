@@ -1,6 +1,6 @@
 {
   "name": "@alerts-streamer-service/ass_client",
-  "version": "1.2.15",
+  "version": "1.2.16",
   "description": "gRPC-Web library that sends event messages for Alerts Streamer Service alerts",
   "author": "Adar Hefer",
   "license": "MIT",
