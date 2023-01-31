@@ -1,7 +1,6 @@
 // @ts-check
-import { ServerStreamingEventResponse, TestServerStreamingEventRequest } from '@alerts-streamer-service/grpc_web_client/src/events_pb';
+import { ServerStreamingEventRequest, ServerStreamingEventResponse, TestServerStreamingEventRequest } from '@alerts-streamer-service/grpc_web_client/src/events_pb';
 import { EventClient } from '@alerts-streamer-service/grpc_web_client/src/events_grpc_web_pb';
-import { Empty } from 'google-protobuf/google/protobuf/empty_pb';
 
 const client = new EventClient(`https://ass.coursequery.app/twitch/events`);
 
@@ -67,7 +66,7 @@ export function configure(config) {
     const PayloadCase = ServerStreamingEventResponse.PayloadCase;
 
     const metadata = { 'api-key': config.apiKey };
-    client.serverStreamingEvent(new Empty(), metadata)
+    client.serverStreamingEvent(new ServerStreamingEventRequest(), metadata)
         .on('data', (response) => {
             switch (response.getPayloadCase()) {
                 case PayloadCase.USER_FOLLOWED_DATA:
