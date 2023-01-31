@@ -1,7 +1,7 @@
 {
-  "name": "ass_module",
+  "name": "@alerts-streamer-service/ass_client",
   "version": "1.2.1",
-  "description": "gRPC-Web library that sends event messages for Alerts Streamer Service alerts, built by rollup",
+  "description": "gRPC-Web library that sends event messages for Alerts Streamer Service alerts",
   "author": "Adar Hefer",
   "license": "MIT",
   "dependencies": {

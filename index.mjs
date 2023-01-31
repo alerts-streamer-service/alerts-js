@@ -1,5 +1,5 @@
 // @ts-check
-import { ServerStreamingEventResponse, TestServerStreamingEventRequest, TestServerStreamingEventResponse } from '@alerts-streamer-service/grpc_web_client/src/events_pb';
+import { ServerStreamingEventResponse, TestServerStreamingEventRequest } from '@alerts-streamer-service/grpc_web_client/src/events_pb';
 import { EventClient } from '@alerts-streamer-service/grpc_web_client/src/events_grpc_web_pb';
 import { Empty } from 'google-protobuf/google/protobuf/empty_pb';
 

@@ -1,0 +1,38 @@
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  deploy:
+    permissions:
+      contents: read
+      id-token: write
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Google Authentication
+      uses: google-github-actions/auth@v1
+      with:
+        workload_identity_provider: ${{ secrets.PROVIDER_NAME }}
+        service_account: ${{ secrets.SA_EMAIL }}
+
+    - name: Setup node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      run: npm install
+    
+    - name: Build standalone module with rollup
+      run: npm run build
+    
+    - name: Upload module to bucket
+      uses: google-github-actions/upload-cloud-storage@v1
+      with:
+        path: output/bundle.mjs
+        destination: alerts-streamer-service-bucket/alerts-js
+    
+    - 
