@@ -7,6 +7,7 @@
   "dependencies": {
     "@alerts-streamer-service/grpc_web_client": "^4.0.0"
   },
+  "types": "index.d.mts",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
@@ -18,8 +19,6 @@
     "build": "npx tsc && npx rollup -c && npx jsdoc2md -c jsdoc.conf index.mjs > docs.md"
   },
   "files": [
-    "index.mjs",
-    "index.d.mts",
-    "index.d.mts.map"
+    "index.mjs"
   ]
 }
