@@ -7,7 +7,6 @@ jobs:
   PUBLISH_PACKAGE:
     permissions:
       contents: read
-      packages: write
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
@@ -29,6 +28,7 @@ jobs:
   UPLOAD_MODULE:
     permissions:
       contents: read
+      id-token: write
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
