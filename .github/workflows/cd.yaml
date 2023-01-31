@@ -8,10 +8,10 @@ jobs:
     permissions:
       contents: read
       packages: write
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     env:
       NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
+
     steps:
     - uses: actions/checkout@v2
 
@@ -31,7 +31,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
 
