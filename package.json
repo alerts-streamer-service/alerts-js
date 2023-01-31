@@ -15,5 +15,8 @@
   },
   "scripts": {
     "build": "npx rollup -c && npx jsdoc2md -c jsdoc.conf index.mjs > docs.md"
-  }
+  },
+  "files": [
+    "index.mjs"
+  ]
 }

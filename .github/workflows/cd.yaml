@@ -7,7 +7,7 @@ jobs:
   PUBLISH_PACKAGE:
     permissions:
       contents: read
-      id-token: write
+      packages: write
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
