@@ -4,10 +4,7 @@ on:
       - v*
 
 jobs:
-  PUBLISH_PACKAGE:
-    permissions:
-      contents: read
-      packages: write
+  build:
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
@@ -20,33 +17,31 @@ jobs:
 
     - name: Install dependencies
       run: npm ci
-    
+
+  publish-github-package:
+    needs: build
+    permissions:
+      contents: read
+      packages: write
+    runs-on: self-hosted
+    steps:    
     - name: Publish to GitHub Packages
       run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
-  UPLOAD_MODULE:
+  upload-module-to-bucket:
+    needs: build
     permissions:
       contents: read
       id-token: write
     runs-on: self-hosted
     steps:
-    - uses: actions/checkout@v2
-
     - name: Google Authentication
       uses: google-github-actions/auth@v1
       with:
         workload_identity_provider: ${{ secrets.PROVIDER_NAME }}
         service_account: ${{ secrets.SA_EMAIL }}
-
-    - name: Setup node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
-
-    - name: Install dependencies
-      run: npm ci
     
     - name: Build standalone module with rollup
       run: npm run build
