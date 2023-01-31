@@ -30,6 +30,7 @@ jobs:
   upload-module-to-google-bucket:
     permissions:
       contents: read
+      packages: read
       id-token: write
     runs-on: ubuntu-latest
     steps:
