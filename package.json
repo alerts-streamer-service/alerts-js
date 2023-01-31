@@ -19,6 +19,8 @@
     "build": "npx tsc && npx rollup -c && npx jsdoc2md -c jsdoc.conf index.mjs > docs.md"
   },
   "files": [
-    "index.mjs"
+    "index.mjs",
+    "index.d.mts",
+    "index.d.mts.map"
   ]
 }
