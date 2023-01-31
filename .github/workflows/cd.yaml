@@ -4,7 +4,29 @@ on:
       - v*
 
 jobs:
-  deploy:
+  PUBLISH_PACKAGE:
+    permissions:
+      contents: read
+      id-token: write
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        registry-url: https://npm.pkg.github.com
+
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Publish to GitHub Packages
+      run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
+  UPLOAD_MODULE:
     permissions:
       contents: read
       id-token: write
@@ -24,7 +46,7 @@ jobs:
         node-version: 18
 
     - name: Install dependencies
-      run: npm install
+      run: npm ci
     
     - name: Build standalone module with rollup
       run: npm run build
@@ -34,5 +56,3 @@ jobs:
       with:
         path: output/bundle.mjs
         destination: alerts-streamer-service-bucket/alerts-js
-    
-    - 
